@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+    <section class="container contact py-5" id="contact">
+        <div class="heading ">
+            <h4 class="pretitle" data-aos="fade-up">
+                contact
+            </h4>
+            <h1 class="title col-12" data-aos="fade-up" data-aos-delay="100">
+                contact us for Any Questions
+            </h1>
+            <p class="col-lg-7 col-12" data-aos="fade-up" data-aos-delay="150">
+                As a matter of fact the unification of the coherent software provides a strict control over
+                The Accomplishment of Intended Estimation
+            </p>
+        </div>
+        <div class="row  gx-4 ">
+            <div class="col-12 col-lg-6 gy-3">
+                <h2 class="title-2 " data-aos="fade-right" data-aos-delay="200">
+                    contact info :
+                </h2>
+                <div class="info d-flex my-4 " data-aos="fade-right" data-aos-delay="250">
+                    <h5><i class="bi bi-envelope-fill mx-4"></i>example@example.com</h5>
+                </div>
+                <div class="info d-flex my-4 " data-aos="fade-up" data-aos-delay="300">
+                    <h5><i class="bi bi-phone-fill mx-4"></i>+123 456 6789</h5>
+                </div>
+                <div class="info d-flex my-4 " data-aos="fade-up" data-aos-delay="350">
+                    <h5><i class="bi bi-geo-alt-fill mx-4"></i>A108 Adam Street, New York, NY 535022</h5>
+                </div>
+                <div class="info d-flex my-4 " data-aos="fade-up" data-aos-delay="400">
+                    <h5><i class="bi bi-instagram mx-4"></i>techida-company</h5>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <!--Form To have user messages-->
+                <form class="main-form" id="contact-us-form" action="https://erramix-themes.com/techidaa/contact.php" method="post">
+                    <div class="col-12">
+                        <div class="row g-3 mb-1">
+                            <div class="col-lg-6 col-12" data-aos="fade-right" data-aos-delay="200">
+                                <input placeholder="name" type="text" id="name" name="name" class="text-input">
+                            </div>
+                            <div class="col-lg-6 col-12" data-aos="fade-left" data-aos-delay="200">
+                                <input placeholder="subject" type="text" id="subject" name="subject" class="text-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="250">
+                        <input placeholder="email" type="email" id="email" name="email" class="text-input my-2">
+                    </div>
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="300">
+            <textarea placeholder="message" class="text-input my-2" rows="7" cols="30" id="message"
+                      name="message"></textarea>
+                    </div>
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="350">
+                        <button type="submit" value="Submit" class="btn">send now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <iframe class="contact-map" data-aos="fade-up" data-aos-delay="450"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.9050207912896!2d-0.14675028449633118!3d51.514958479636384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761ad554c335c1%3A0xda2164b934c67c1a!2sOxford+St%2C+London%2C+UK!5e0!3m2!1sen!2sro!4v1485889312335"
+                allowfullscreen=""></iframe>
+    </section>
+{% endblock %}

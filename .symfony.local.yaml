@@ -1,0 +1,8 @@
+# .symfony.local.yaml
+workers:
+  # ...
+  consume:
+    cmd: ['symfony', 'console', 'messenger:consume', 'async']
+  build:
+    consume:
+      cmd: [ 'symfony', 'console', 'asset-map:compile' ]

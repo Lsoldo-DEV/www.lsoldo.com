@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="auth">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-5 col-12 d-flex flex-column justify-content-start">
+                    {% for flash_error in app.flashes('verify_email_error') %}
+                        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                    {% endfor %}
+                    {% for child in registrationForm %}
+                    <div>
+                        <strong>{{ child.vars.name }}</strong>:
+                        {% if child.vars.errors|length > 0 %}
+                            <ul>
+                                {% for error in child.vars.errors %}
+                                    <li>{{ error.message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <em>Pas d'erreur</em>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <h1 class="title">sign up</h1>
+                    <p>have an account already, <a href="{{ path('app_login') }}" class="unique-text"> login</a></p>
+                    {{ form_errors(registrationForm) }}
+
+                    {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.fullName) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                    {{ form_row(registrationForm.agreeTerms) }}
+
+                    <button type="submit" class="btn">Register</button>
+                    {{ form_end(registrationForm) }}
+                </div>
+                <div class="col-lg-6 col-12">
+                    <img src="{{ asset('template/images/auth/signup.svg') }}" alt="singup">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

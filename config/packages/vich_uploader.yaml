@@ -1,0 +1,9 @@
+vich_uploader:
+    db_driver: orm
+    mappings:
+        post_thumbnail:
+            uri_prefix: /post/thumbnails
+            upload_destination: '%kernel.project_dir%/public/post/thumbnails'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            delete_on_remove: true  # determine whether to delete file upon removal of entity
+            delete_on_update: true  # determine wheter to delete the file upon update of entity

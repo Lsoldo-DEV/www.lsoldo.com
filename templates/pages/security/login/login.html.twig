@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="auth">
+        <form method="post">
+
+            <div class="container">
+                <div class="row align-items-center g-4 justify-content-between">
+                    <div class="col-lg-6 col-12">
+                        <img src="{{ asset('template/images/auth/login.svg') }}" alt="singup">
+                    </div>
+                    <div class="col-lg-5  mb-4 col-12 d-flex flex-column justify-content-start">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        <h1 class="title">login</h1>
+
+                        <label for="username">Email</label>
+                        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+                        <label for="password">Password</label>
+                        <input type="password" name="_password" id="password" class="form-control mb-3" autocomplete="current-password" required>
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+                        <button class="btn btn-lg mb-3" type="submit">
+                            Sign in
+                        </button>
+                        {% if app.user %}
+                            <p class="">
+                                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                            </p>
+                        {% else %}
+                            <p>you dont have an account ?<a href="{{ path('app_register') }}" class="unique-text"> register now</a></p>
+                            <p>forgot password ? <a href="#" class="unique-text">reset password</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+{% endblock %}

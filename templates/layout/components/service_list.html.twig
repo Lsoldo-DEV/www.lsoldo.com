@@ -1,0 +1,8 @@
+{% for service in services %}
+
+    {% include 'layout/components/service_item.html.twig'%}
+{% else %}
+    <div>
+        <h4>{% trans %}No service available{% endtrans %}</h4>
+    </div>
+{% endfor %}

@@ -1,0 +1,12 @@
+{% if breadcrumbs is defined and breadcrumbs is instanceof('App\\Entity\\Breadcrumb') %}
+    <section class="breadcrumbs py-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="container">
+            <ol>
+                {% for i in breadcrumbs.breadcrumbItems %}
+                    <li><a href="{{ i.url }}">{{ i.name }}</a></li>
+                {% endfor %}
+                <li>{{ breadcrumbs.endRouteName }}</li>
+            </ol>
+        </div>
+    </section>
+{% endif %}
