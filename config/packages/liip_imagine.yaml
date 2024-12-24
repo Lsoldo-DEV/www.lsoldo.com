@@ -2,3 +2,26 @@
 liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
+    filter_sets:
+        cache: ~
+        thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [ 90,63 ],mode: outbound }
+                background: { size: [ 94,67 ], position: center , color: '#ffffff' }
+        card:
+            quality: 75
+            filters:
+                thumbnail: { size: [ 612,415 ],mode: inset }
+                background: { size: [ 620,423 ], position: center , color: '#ffffff' }
+        carousel:
+            quality: 75
+            filters:
+                thumbnail: { size: [ 812,615 ],mode: outbound }
+                background: { size: [ 820,623 ], position: center , color: '#ffffff' }
+        cart_realisation:
+            quality: 75
+            filters:
+                thumbnail: { size: [ 414,276 ],mode: outbound }
+                background: { size: [ 415,277 ], position: center , color: '#ffffff' }
+

@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class OptionFixtures extends Fixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $options[] = (new SettingsOption())->setLang('fr')->setLabel(Constant::APP_LABEL_PRIVACY)->setValue("EDIT");
         $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_LABEL_PRIVACY)->setValue("EDIT");
@@ -18,23 +18,37 @@ class OptionFixtures extends Fixture
         $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_LABEL_CGU)->setValue("EDIT");
 
 
-        $options[] = (new SettingsOption())->setLang('fr')->setLabel(Constant::APP_LABEL_ABOUT)->setValue("EDIT");
-        $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_LABEL_ABOUT)->setValue("EDIT");
-        $options[] = (new SettingsOption())->setLang('ar')->setLabel(Constant::APP_LABEL_ABOUT)->setValue("EDIT");
 
 
         $options[] = (new SettingsOption())->setLang('fr')->setLabel(Constant::APP_LABEL_HOME_SUBTITLE)->setValue("EDIT");
         $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_LABEL_HOME_SUBTITLE)->setValue("EDIT");
-        $options[] = (new SettingsOption())->setLang('ar')->setLabel(Constant::APP_LABEL_HOME_SUBTITLE)->setValue("EDIT");
+
+
 
         $options[] = (new SettingsOption())->setLang('fr')->setLabel(Constant::APP_LABEL_HOME_TITLE)->setValue("EDIT");
         $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_LABEL_HOME_TITLE)->setValue("EDIT");
-        $options[] = (new SettingsOption())->setLang('ar')->setLabel(Constant::APP_LABEL_HOME_TITLE)->setValue("EDIT");
 
 
-        $options[] = (new SettingsOption())->setLang('fr')->setLabel(Constant::APP_ABOUT_INFORMATION)->setValue("EDIT");
-        $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_ABOUT_INFORMATION)->setValue("EDIT");
-        $options[] = (new SettingsOption())->setLang('ar')->setLabel(Constant::APP_ABOUT_INFORMATION)->setValue("EDIT");
+        $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_LABEL_HOME_TITLE1)->setValue("EDIT");
+        $options[] = (new SettingsOption())->setLang('fr')->setLabel(Constant::APP_LABEL_HOME_TITLE1)->setValue("EDIT");
+
+        $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_LABEL_HOME_TITLE2)->setValue("EDIT");
+        $options[] = (new SettingsOption())->setLang('fr')->setLabel(Constant::APP_LABEL_HOME_TITLE2)->setValue("EDIT");
+
+
+        $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_LABEL_SERVICE_TITLE)->setValue("EDIT");
+        $options[] = (new SettingsOption())->setLang('fr')->setLabel(Constant::APP_LABEL_SERVICE_TITLE)->setValue("EDIT");
+        $options[] = (new SettingsOption())->setLang('fr')->setLabel(Constant::APP_LABEL_SERVICE_SUBTITLE)->setValue("EDIT");
+        $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_LABEL_SERVICE_SUBTITLE)->setValue("EDIT");
+
+
+
+
+
+        $options[] = (new SettingsOption())->setLang('fr')->setLabel(Constant::APP_LABEL_HOME_TITLE_PHASE)->setValue("EDIT");
+        $options[] = (new SettingsOption())->setLang('en')->setLabel(Constant::APP_LABEL_HOME_TITLE_PHASE)->setValue("EDIT");
+
+
 
 
 

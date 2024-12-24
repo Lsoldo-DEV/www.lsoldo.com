@@ -28,9 +28,16 @@ class Service
     #[ORM\OneToMany(targetEntity: ServiceDescription::class, mappedBy: 'service')]
     private Collection $description;
 
+    /**
+     * @var Collection<int, Project>
+     */
+    #[ORM\OneToMany(targetEntity: Project::class, mappedBy: 'service')]
+    private Collection $projects;
+
     public function __construct()
     {
         $this->description = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -86,6 +93,36 @@ class Service
             // set the owning side to null (unless already changed)
             if ($description->getService() === $this) {
                 $description->setService(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Project>
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): static
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects->add($project);
+            $project->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): static
+    {
+        if ($this->projects->removeElement($project)) {
+            // set the owning side to null (unless already changed)
+            if ($project->getService() === $this) {
+                $project->setService(null);
             }
         }
 

@@ -43,10 +43,10 @@ security:
         ROLE_MANAGER: ROLE_USER
         ROLE_ADMIN: ROLE_MANAGER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     access_control:
-        #- { path: '^/{_locale}/admin', roles: ROLE_ADMIN }
-        - { path: '^/{_locale}/admin', roles: ROLE_USER }
-        - { path: '^/{_locale}/profile', roles: ROLE_USER }
+        - { path: ^/(%locale%)/dashboard, roles: ROLE_MANAGER }
+        - { path: ^/(%locale%)/admin, roles: ROLE_ADMIN }
 
 when@test:
     security:

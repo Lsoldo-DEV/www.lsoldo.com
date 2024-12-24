@@ -2,27 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="owl-carousel client owl-theme">
+                {% for item in clientsLogo %}
                 <div class="item">
-                    <img src="images/clients-logos/1-white.png" alt="client-logo">
+                    <img src="images/clients-logos/1-white.png" alt="{{ item.name }}-logo">
                 </div>
-                <div class="item">
-                    <img src="images/clients-logos/2-white.png" alt="client-logo">
-                </div>
-                <div class="item">
-                    <img src="images/clients-logos/3-white.png" alt="client-logo">
-                </div>
-                <div class="item">
-                    <img src="images/clients-logos/4-white.png" alt="client-logo">
-                </div>
-                <div class="item">
-                    <img src="images/clients-logos/5-white.png" alt="client-logo">
-                </div>
-                <div class="item">
-                    <img src="images/clients-logos/6-white.png" alt="client-logo">
-                </div>
-                <div class="item">
-                    <img src="images/clients-logos/7-white.png" alt="client-logo">
-                </div>
+                {% endfor %}
+
             </div>
         </div>
     </div>

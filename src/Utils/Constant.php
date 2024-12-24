@@ -17,6 +17,8 @@ class Constant
     public const APP_NAME = 'app-name';
     public const APP_LABEL_HOME_SUBTITLE = 'home-title';
     public const APP_LABEL_HOME_TITLE = 'home-subtitle';
+    public const APP_LABEL_HOME_TITLE_PHASE = 'home-subtitle-phase';
+
     public const APP_LABEL_USER_CREATION = 'user-creation';
     public const APP_LABEL_ABOUT = 'about';
     public const APP_LABEL_PRIVACY = 'privacy';
@@ -26,6 +28,11 @@ class Constant
     const APP_TRUE = "<div>TRUE</div>";
 
     const DEFAULT_DESCRIPTION_LANGUAGE = "fr";
+    const APP_LABEL_HOME_TITLE1 = 'home-subtitle1';
+    const APP_LABEL_HOME_TITLE2 = 'home-subtitle2';
+    const APP_LABEL_SERVICE_TITLE = "service-title";
+    const APP_LABEL_SERVICE_SUBTITLE = "service-subtitle";
+
 
     public static function getMailAndSenderName():array{
         return [$_ENV['SENDER_EMAIL'],$_ENV['SENDER_EMAIL_NAME']];

@@ -9,6 +9,8 @@
         {% if currentDescription is not null  %}
             <p>{{ currentDescription.summary |slice(0,150) ~'...' }}</p>
         {% endif %}
-        <a href="service-single.html" class="my-2 learn-more">learn more <i class="bi bi-arrow-right"></i></a>
+        {% if with_link %}
+        <a href="{{ path('app_service_show',{'id':service.id}) }}" class="my-2 learn-more">learn more <i class="bi bi-arrow-right"></i></a>
+        {% endif %}
     </div>
 </div>

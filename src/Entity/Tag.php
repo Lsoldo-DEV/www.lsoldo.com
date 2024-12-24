@@ -32,9 +32,9 @@ class Tag implements \JsonSerializable
     #[ORM\Column(type: Types::STRING, unique: true)]
     private readonly string $name;
 
-    public function __construct(string $name)
+    public function __construct()
     {
-        $this->name = $name;
+
     }
 
     public function getId(): ?int
@@ -46,6 +46,11 @@ class Tag implements \JsonSerializable
     {
         return $this->name;
     }
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
 
     public function jsonSerialize(): string
     {

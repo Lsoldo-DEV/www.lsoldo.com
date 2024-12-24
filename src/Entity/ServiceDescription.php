@@ -49,6 +49,11 @@ class ServiceDescription
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $reasonTochooseIntro = null;
+
+
+
     public function __construct()
     {
         $this->reasons = new ArrayCollection();
@@ -173,4 +178,18 @@ class ServiceDescription
 
         return $this;
     }
+
+    public function getReasonTochooseIntro(): ?string
+    {
+        return $this->reasonTochooseIntro;
+    }
+
+    public function setReasonTochooseIntro(?string $reasonTochooseIntro): static
+    {
+        $this->reasonTochooseIntro = $reasonTochooseIntro;
+
+        return $this;
+    }
+
+
 }

@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\AboutRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AboutRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class About
 {
     #[ORM\Id]
@@ -38,6 +40,13 @@ class About
     #[ORM\Column(nullable: true)]
     private ?array $ServicesStats = null;
 
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $lang = null;
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?DateTimeImmutable $createAt;
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private ?DateTimeImmutable $updateAt;
     public function getId(): ?int
     {
         return $this->id;
@@ -138,4 +147,50 @@ class About
 
         return $this;
     }
+    public function getLang(): ?string
+    {
+        return $this->lang;
+    }
+
+    public function setLang(?string $lang): self
+    {
+        $this->lang = $lang;
+
+        return $this;
+    }
+    public function setCreateAt(DateTimeImmutable $createdAt): self
+    {
+        $this->createAt = $createdAt;
+
+        return $this;
+    }
+    public function getCreateAt(): ?DateTimeImmutable
+    {
+        return $this->createAt;
+    }
+
+    public function getUpdateAt(): ?DateTimeImmutable
+    {
+        return $this->updateAt;
+    }
+
+
+    public function setUpdateAt(DateTimeImmutable $updatedAt): self
+    {
+        $this->updateAt = $updatedAt;
+
+        return $this;
+    }
+    #[ORM\PrePersist]
+    public function OnInitialSave(): void
+    {
+        $this->createAt = new DateTimeImmutable('now');
+
+    }
+    #[ORM\PreUpdate]
+    public function OnUpdate(): void
+    {
+        $this->updateAt = new DateTimeImmutable('now');
+    }
+
 }

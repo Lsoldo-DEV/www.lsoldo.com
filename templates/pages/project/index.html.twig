@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProjectController!{% endblock %}
+
+{% block body %}
+    <section class="container portfolio py-5" id="portfolio">
+        <div class="heading">
+            <h4 class="pretitle" data-aos="fade-up">
+                portfolio
+            </h4>
+            <h1 class="title col-12" data-aos="fade-up" data-aos-delay="100">
+                our portfolio
+            </h1>
+        </div>
+        <ul class="filters  d-flex my-4" data-aos="fade-up" data-aos-delay="150">
+                {% for tag in tags %}
+                    {% if loop.index == 1 %}
+                        <li class="nav-item portfolio-btn active">
+                            <a class="nav-link" data-filter="*">All</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="nav-item portfolio-btn mx-lg-3 mx-1">
+                        <a class="nav-link" data-filter=".{{ tag.name }}">{{ tag.name }}</a>
+                    </li>
+                {% endfor %}
+        </ul>
+
+        <div class="row portfolio-row gy-4 gx-4" data-aos="fade-up" data-aos-delay="150">
+            {% for project in projects %}
+                <div class="col-md-6 col-lg-4 mx-auto {% for tag in project.tags %} {{ tag.name }}  {% endfor %}">
+                    <div class="portfolio-item">
+                        <img
+                                {% if  project.getFirstProjectFile()  is not null %}
+                                    src="{{ vich_uploader_asset(project.getFirstProjectFile(),'thumbnailFile') }}"
+                                    alt="{{  project.title }}"
+                                {% else %}
+                                    src="{{ asset('template/images/portfolio/1.jpg') }}"
+                                {% endif %}
+                             class="gallery-item" alt="portfolio-img">
+                        <div class="img-overlay">
+                            <div class="content">
+                                <h3>{{ project.title }}</h3>
+                                <h6>{{ project.briefDescription }}</h6>
+                                <div class="d-flex tags my-2">
+                                    {% for techno in project.technologies %}
+                                    <span>#{{ techno }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="link">
+                                    <a class="unique-text" href="{{ path('app_project_show',{'id':project.id}) }}">view
+                                        project</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

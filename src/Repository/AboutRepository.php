@@ -15,6 +15,9 @@ class AboutRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, About::class);
     }
+    public function findAbout(string $local="en"):?About{
+        return $this->findOneBy(["lang" => $local]);
+    }
 
 //    /**
 //     * @return About[] Returns an array of About objects

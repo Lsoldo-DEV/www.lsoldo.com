@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\ReasonToChooseYou;
 use App\Entity\Service;
 use App\Entity\ServiceDescription;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -93,7 +94,23 @@ class ServicesFixtures extends Fixture
                     $description->setContent($descData['content']);
                     $description->setPublishedAt(new \DateTimeImmutable());
                     $description->setService($service);
+                    $description->setReasonTochooseIntro("Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Ea rerum beatae dolore quod molestias quos tempora ve? 
+                    Atque eos eius hic iusto. Ullam distinctio delectus nobis atque! Ea, atque.");
+                    $reason = new ReasonToChooseYou();
+                    $reason->setLang($descData['lang']);
+                    $reason->setTitle("Latest Technologies");
+                    $reason->setDescription("Lorem ipsum dolor sit amet com");
+                    $reason->setServiceDescription($description);
+
+                    $reason1 = new ReasonToChooseYou();
+                    $reason1->setLang($descData['lang']);
+                    $reason1->setTitle("Delever Just On Time");
+                    $reason1->setDescription("Lorem ipsum dolor sit amet com");
+                    $reason1->setServiceDescription($description);
                     $manager->persist($description);
+                    $manager->persist($reason);
+                    $manager->persist($reason1);
                 }
             }
 
