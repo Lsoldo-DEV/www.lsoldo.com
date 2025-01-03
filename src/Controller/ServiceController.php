@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/qrcode')]
+#[Route('/service')]
 class ServiceController extends AbstractController
 {
     public function __construct(private readonly ServiceRepository $serviceRepository)
