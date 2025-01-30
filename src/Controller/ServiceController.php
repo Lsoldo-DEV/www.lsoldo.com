@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Service;
+use App\Repository\FAQRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\SettingsOptionRepository;
 use App\Repository\SocialLinkRepository;
@@ -20,7 +21,7 @@ class ServiceController extends AbstractController
     }
 
     #[Route(name: 'app_service_index', methods: ['GET'])]
-    public function index(Request $request,SettingsOptionRepository $optionRepository): Response
+    public function index(Request $request,SettingsOptionRepository $optionRepository, FAQRepository $faqRepository): Response
     {
         $titleArray = Constant::getTitleAndSubTitle($optionRepository,$request,[
             Constant::APP_LABEL_SERVICE_TITLE,
@@ -30,6 +31,7 @@ class ServiceController extends AbstractController
             'services' => $services,
             "service_title"=>$titleArray[0],
             "service_subtitle"=>$titleArray[1],
+            "faqs" => $faqRepository->findAll()
         ]);
     }
     #[Route('/{id}', name: 'app_service_show', requirements: ['id' => '\d+'], methods: ['GET'])]

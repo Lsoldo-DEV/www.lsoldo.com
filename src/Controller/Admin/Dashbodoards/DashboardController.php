@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Dashbodoards;
 
 use App\Entity\About;
+use App\Entity\FAQ;
 use App\Entity\Project;
 use App\Entity\ProjectFile;
 use App\Entity\ReasonToChooseYou;
@@ -43,7 +44,6 @@ class DashboardController extends AbstractDashboardController
                 . '<img src="/logo_tls.webp"></a>')
             ->renderContentMaximized()
 
-            ->renderSidebarMinimized()
             ->generateRelativeUrls()
             ->setFaviconPath("logo_tls.webp")
             ->setLocales([
@@ -56,22 +56,24 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+    
         yield MenuItem::section('Services');
-        yield MenuItem::linkToCrud('Services', 'fa fa-tags', Service::class);
-        yield MenuItem::linkToCrud('ServiceDescription', 'fa fa-tags', ServiceDescription::class);
-        yield MenuItem::linkToCrud('ReasonToChooseYou', 'fa fa-tags', ReasonToChooseYou::class);
-
-
-        yield    MenuItem::section('Users');
-        yield    MenuItem::linkToCrud('Users', 'fa fa-user', User::class)
+        yield MenuItem::linkToCrud('Services', 'fa fa-cogs', Service::class);
+        yield MenuItem::linkToCrud('ServiceDescription', 'fa fa-info-circle', ServiceDescription::class);
+        yield MenuItem::linkToCrud('ReasonToChooseYou', 'fa fa-thumbs-up', ReasonToChooseYou::class);
+    
+        yield MenuItem::section('Users');
+        yield MenuItem::linkToCrud('Users', 'fa fa-users', User::class)
             ->setPermission('ROLE_ADMIN');
-        yield    MenuItem::section('App settings');
-        yield MenuItem::linkToCrud('Testmonials', 'fas fa-cog', Testmonial::class);
-        yield MenuItem::linkToCrud('About', 'fas fa-cog', About::class);
-        yield MenuItem::linkToCrud('Socials', 'fas fa-cog', SocialLink::class);
-        yield MenuItem::linkToCrud('Projects', 'fas fa-cog', Project::class);
-        yield MenuItem::linkToCrud('ProjectsFile', 'fas fa-cog', ProjectFile::class);
-        yield MenuItem::linkToCrud('Tags', 'fas fa-cog', Tag::class);
-        yield MenuItem::linkToCrud('General', 'fas fa-cog', SettingsOption::class);
+        
+        yield MenuItem::section('App settings');
+        yield MenuItem::linkToCrud('Testimonials', 'fa fa-comments', Testmonial::class);
+        yield MenuItem::linkToCrud('About', 'fa fa-info-circle', About::class);
+        yield MenuItem::linkToCrud('FAQ', 'fa fa-circle-question', FAQ::class);
+        yield MenuItem::linkToCrud('Socials', 'fa fa-share-alt', SocialLink::class);
+        yield MenuItem::linkToCrud('Projects', 'fa fa-folder-open', Project::class);
+        yield MenuItem::linkToCrud('ProjectsFile', 'fa fa-file', ProjectFile::class);
+        yield MenuItem::linkToCrud('Tags', 'fa fa-tags', Tag::class);
+        yield MenuItem::linkToCrud('General', 'fa fa-cog', SettingsOption::class);
     }
 }
