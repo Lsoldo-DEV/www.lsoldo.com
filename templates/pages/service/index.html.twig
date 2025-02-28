@@ -4,44 +4,5 @@
 
 {% block body %}
     {% include 'pages/home/service_section.html.twig' %}
-    <section class="container faq py-5">
-        <div class="heading">
-            <h4 class="pretitle" data-aos="fade-up">
-                FAQ
-            </h4>
-            <h1 class="title col-12" data-aos="fade-up" data-aos-delay="100">
-                Frequently Asked Questions
-            </h1>
-            <p class="col-lg-7 col-12" data-aos="fade-up" data-aos-delay="150">
-                As a matter of fact the unification of the coherent software provides a strict control over
-                The Accomplishment of Intended Estimation
-            </p>
-        </div>
-        <div class="row justify-content-center align-items-center  gx-4 ">
-            <div class="col-12 col-lg-6" data-aos="fade-right" data-aos-delay="200">
-                <img src="{{ asset('template/images/faq/customer.png') }}" alt="faq">
-            </div>
-            <div class="col-12 col-lg-6  ">
-            
-				{% for faq in faqs %}
-					<div class="col-12 my-4 " data-aos="fade-up" data-aos-delay="400">
-						<div class="box">
-							<div class="d-flex w-100 justify-content-between">
-								<a data-bs-toggle="collapse" class="w-100" onclick="rotateIcon('icon{{ loop.index }}')" href="#answer{{ loop.index }}" role="button" aria-expanded="false">
-									<h4 class="d-flex justify-content-between w-100 heading-3 m-0 p-0">
-										{{ faq.question }}
-										<i class="bi bi-chevron-compact-down mx-4 rotate-icon" id="icon{{ loop.index }}"></i>
-									</h4>
-								</a>
-							</div>
-							<p id="answer{{ loop.index }}" class="collapse">
-								{{ faq.answer }}
-							</p>
-						</div>
-					</div>
-				{% endfor %}
-                
-            </div>
-        </div>
-    </section>
+    {% include "layout/partials/_faq.html.twig" %}
 {% endblock %}

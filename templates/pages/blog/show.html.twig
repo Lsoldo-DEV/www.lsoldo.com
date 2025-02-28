@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container blog py-5">
+		<div class="row d-flex justify-content-between">
+			<main class="col-lg-8">
+				{% if description %}
+					<article class="mb-5">
+						<h1 class="title mb-4">{{ description.title }}</h1>
+
+						<img src="{{ vich_uploader_asset(post, 'thumbnailFile') }}" class="img-fluid rounded mb-4" alt="{{ description.title }}">
+						<div class="box row align-items-center justify-content-center">
+							<div class="content">
+								{{ description.content|raw }}
+							</div>
+							<div class="meta d-flex justify-content-between align-items-end mt-4">
+								<span class="text-muted">
+									ecrit par{{ post.author.fullName }}
+								</span>
+								<div class="d-flex justify-content-evenly">
+									<span class="text-muted">
+										publie le
+										{{ description.publishedAt|date('H:i:s')}}
+									</span>
+
+									<button class="btn d-flex text-muted p-0 comment-toggle" title="{{ 'show_comments'|trans }}">
+										<i class="bi bi-chat comment-icon"></i>
+									</button>
+
+								</div>
+							</div>
+						</div>
+					</article>
+				{% else %}
+					<p>No description available for the current locale.</p>
+				{% endif %}
+
+				<section class="comments mt-5 d-none">
+					<h3>{{ 'comments'|trans }}
+						({{ post.comments|length }})</h3>
+
+					<div class="comment-list">
+
+						<div class="card mb-3">
+							{% for comment in post.comments %}
+								<div class="card-body">
+									<div class="d-flex justify-content-between">
+										<div>
+											<h5 class="card-title">{{ comment.author.fullName }}</h5>&nbps;
+											<small class="text-muted">{{ comment.publishedAt|date('H:i:s') }}</small>
+										</div>
+										<div class="dropdown">
+											<button class="switch-button" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+												<i class="bi bi-three-dots"></i>
+											</button>
+											<ul class="dropdown-menu">
+												<li>
+													<a class="dropdown-item" href="">
+														<i class="bi bi-pencil"></i>
+														{{ 'modifier'|trans }}
+													</a>
+												</li>
+												<li>
+													<form method="post" action="{{ path('app_comment_delete', {'id': comment.id}) }}">
+														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+														<button class="dropdown-item  btn">
+															<i class="bi bi-trash"></i>
+															{{ 'supprimer'|trans }}
+														</button>
+													</form>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<p class="card-text mt-2">{{ comment.content }}</p>
+								</div>
+							{% endfor %}
+						</div>
+
+					</div>
+					{% include "/pages/blog/comment/_form.html.twig" %}
+				</section>
+			</main>
+			<div class="col-lg-3 col-sm-12 client-side row g-2" data-aos="fade-left" data-aos-delay="150">
+				{% for latestPost in latestPosts %}
+					{% for description in latestPost.description %}
+						<div class="col-12">
+							<div class="box box-service box-hover p-3 shadow-sm">
+								<div class="mb-4">
+									<img src="{{ vich_uploader_asset(latestPost, 'thumbnailFile') }}" class="img-fluid rounded mb-3" alt="{{ description.title }}">
+									<h5>{{ description.title }}</h5>
+									<a href="{{ path('app_blog_show', {'id': latestPost.id}) }}" class="my-2 learn-more">
+										Lire la suite
+										<i class="bi bi-arrow-right"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				{% endfor %}
+
+				<h2 class="title-2 mt-4">follow us</h2>
+				{% include "layout/components/social_section.html.twig" with {'link': link} %}
+			</div> 
+		</div>
+	</div>
+
+	{% include "layout/partials/_faq.html.twig" %}
+
+{% endblock %}

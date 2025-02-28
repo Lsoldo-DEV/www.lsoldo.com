@@ -37,14 +37,15 @@ class Description
     /**
      * @var Collection<int, Tag>
      */
-    #[ORM\ManyToMany(targetEntity: Tag::class, cascade: ['persist'])]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'description', cascade: ['persist'])]
     #[ORM\OrderBy(['name' => 'ASC'])]
     #[Assert\Count(max: 4, maxMessage: 'description.too_many_tags')]
     private Collection $tags;
 
-    #[ORM\ManyToOne(inversedBy: 'description')]
+    #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'description')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Post $post = null;
+
     public function __construct()
     {
         $this->publishedAt = new \DateTimeImmutable();
@@ -137,5 +138,10 @@ class Description
         $this->post = $post;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title!=null?$this->title:$this->id;
     }
 }

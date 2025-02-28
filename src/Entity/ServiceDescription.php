@@ -7,9 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: ServiceDescriptionRepository::class)]
+#[Vich\Uploadable]
 class ServiceDescription
 {
     #[ORM\Id]
@@ -36,8 +40,19 @@ class ServiceDescription
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $top_image = null;
 
+    #[Vich\UploadableField(mapping: "service_images", fileNameProperty: "top_image")]
+    #[Assert\Image(mimeTypes: ["image/jpeg", "image/jpg", "image/png"], allowLandscape: true, allowPortrait: true)]
+    private ?File $topImageFile = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $end_image = null;
+
+    #[Vich\UploadableField(mapping: "service_images", fileNameProperty: "end_image")]
+    #[Assert\Image(mimeTypes: ["image/jpeg", "image/jpg", "image/png"], allowLandscape: true, allowPortrait: true)]
+    private ?File $endImageFile = null;
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private DateTimeImmutable $updatedAt;
 
     /**
      * @var Collection<int, ReasonToChooseYou>
@@ -125,6 +140,20 @@ class ServiceDescription
         return $this;
     }
 
+    public function setTopImageFile(?File $topImageFile = null): void
+    {
+        $this->topImageFile = $topImageFile;
+
+        if ($topImageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getTopImageFile(): ?File
+    {
+        return $this->topImageFile;
+    }
+
     public function getEndImage(): ?string
     {
         return $this->end_image;
@@ -133,6 +162,32 @@ class ServiceDescription
     public function setEndImage(?string $end_image): static
     {
         $this->end_image = $end_image;
+
+        return $this;
+    }
+
+    public function setEndImageFile(?File $endImageFile = null): void
+    {
+        $this->endImageFile = $endImageFile;
+
+        if ($endImageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getEndImageFile(): ?File
+    {
+        return $this->endImageFile;
+    }
+
+    public function getUpdatedAt(): ?DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

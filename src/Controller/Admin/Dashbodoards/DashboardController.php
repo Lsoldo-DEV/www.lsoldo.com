@@ -3,7 +3,9 @@
 namespace App\Controller\Admin\Dashbodoards;
 
 use App\Entity\About;
+use App\Entity\Description;
 use App\Entity\FAQ;
+use App\Entity\Post;
 use App\Entity\Project;
 use App\Entity\ProjectFile;
 use App\Entity\ReasonToChooseYou;
@@ -43,7 +45,7 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('<a href="' . $this->generateUrl('app_home') . '" style="text-decoration: none;">'
                 . '<img src="/logo_tls.webp"></a>')
             ->renderContentMaximized()
-
+            ->renderSidebarMinimized()
             ->generateRelativeUrls()
             ->setFaviconPath("logo_tls.webp")
             ->setLocales([
@@ -62,6 +64,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('ServiceDescription', 'fa fa-info-circle', ServiceDescription::class);
         yield MenuItem::linkToCrud('ReasonToChooseYou', 'fa fa-thumbs-up', ReasonToChooseYou::class);
     
+        yield MenuItem::section('Blog');
+        yield MenuItem::linkToCrud('Post', 'fa-solid fa-newspaper', Post::class);
+        yield MenuItem::linkToCrud('PostDescription', 'fa-solid fa-file-alt', Description::class);
+        
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('Users', 'fa fa-users', User::class)
             ->setPermission('ROLE_ADMIN');

@@ -1,0 +1,23 @@
+{{ form_start(commentForm, {'action': path('app_comment_create', {'id': post.id})}) }}
+<div class="input-group mb-3">
+	{{ form_widget(commentForm.content, {'attr': {'class': 'form-control', 'placeholder': 'add_comment'|trans}}) }}
+	{{ form_errors(commentForm.content) }}
+	
+	<button type="submit" class="btn">
+		<i class="bi bi-send"></i>
+	</button>
+</div>
+{{ form_end(commentForm) }} 
+
+{# <div id = "comment-form">
+	{{ form_start(commentForm, {'attr': {'id': 'comment-form'}}) }}
+	<div class="input-group mb-3">
+		{{ form_widget(commentForm.content, {'attr': {'class': 'form-control', 'placeholder': 'add_comment'|trans}}) }}
+		{{ form_errors(commentForm.content) }}
+		<button type="submit" class="btn" id="submit-comment-btn">
+			<i class="bi bi-send"></i>
+		</button>
+	</div>
+	<input type="hidden" id="comment-id" name="comment_id" value="">
+	{{ form_end(commentForm) }}
+</div> #}

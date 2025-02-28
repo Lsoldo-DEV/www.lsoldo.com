@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\FAQRepository;
 use App\Entity\Project;
 use App\Repository\ProjectRepository;
 use App\Repository\SocialLinkRepository;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class ProjectController extends AbstractController
 {
     #[Route( name: 'app_project_index', methods: ['GET'])]
-    public function index(Request $request,ProjectRepository $projectRepository): Response
+    public function index(Request $request, ProjectRepository $projectRepository): Response
     {
        $projects= $projectRepository->findAllOrderedByLang( $request->get('_locale'));
         $tags = [];
@@ -26,23 +27,21 @@ class ProjectController extends AbstractController
             }
         }
 
-
-
         return $this->render('pages/project/index.html.twig', [
             'controller_name' => 'ProjectController',
             'projects' => $projects,
             'tags' => array_values($tags),
-
         ]);
     }
     #[Route('/{id}', name: 'app_project_show', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function show(Project $project,SocialLinkRepository $linkRepository): Response
+    public function show(Project $project, Request $request, SocialLinkRepository $linkRepository, FAQRepository $faqRepository): Response
     {
         $link = $linkRepository->findOneBy([], ['id' => 'DESC']);
-
+        $faqs = $faqRepository->findAllOrderedByLang( $request->get('_locale'));
         return $this->render('pages/project/show.html.twig', [
             'project' => $project,
             'link' => $link,
+            'faqs' => $faqs
         ]);
     }
 }

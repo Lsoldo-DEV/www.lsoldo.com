@@ -1,18 +1,26 @@
 vich_uploader:
     db_driver: orm
     mappings:
+        service_images:
+            uri_prefix: /uploads/images/service/top_end_images
+            upload_destination: '%kernel.project_dir%/public/uploads/images/service/top_end_images'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            delete_on_remove: true  # determine whether to delete file upon removal of entity
+            delete_on_update: true  # determine wheter to delete the file upon update of entity
         post_thumbnail:
             uri_prefix: /uploads/images/post/thumbnails
             upload_destination: '%kernel.project_dir%/public/uploads/images/post/thumbnails'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
             delete_on_remove: true  # determine whether to delete file upon removal of entity
             delete_on_update: true  # determine wheter to delete the file upon update of entity
+        
         project_thumbnail:
             uri_prefix: /uploads/images/project/thumbnails
             upload_destination: '%kernel.project_dir%/public/uploads/images/project/thumbnails'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
             delete_on_remove: true  # determine whether to delete file upon removal of entity
             delete_on_update: true  # determine wheter to delete the file upon update of entity
+       
         project_videos:
             uri_prefix: /uploads/videos/projets
             upload_destination: '%kernel.project_dir%/public/uploads/videos/projets'

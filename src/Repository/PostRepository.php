@@ -15,13 +15,17 @@ use App\Entity\Post;
 use App\Entity\Tag;
 use App\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
+
 use function Symfony\Component\String\u;
 
 
 class PostRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator)
     {
         parent::__construct($registry, Post::class);
     }
@@ -42,8 +46,8 @@ class PostRepository extends ServiceEntityRepository
 
         foreach ($searchTerms as $key => $term) {
             $queryBuilder
-                ->orWhere('p.title LIKE :t_'.$key)
-                ->setParameter('t_'.$key, '%'.$term.'%')
+                ->orWhere('p.title LIKE :t_' . $key)
+                ->setParameter('t_' . $key, '%' . $term . '%')
             ;
         }
 
@@ -52,8 +56,7 @@ class PostRepository extends ServiceEntityRepository
             ->orderBy('p.publishedAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
 
         return $result;
     }
@@ -71,5 +74,49 @@ class PostRepository extends ServiceEntityRepository
         return array_filter($terms, static function ($term) {
             return 2 <= $term->length();
         });
+    }
+
+    public function paginatePost(int $page, string $locale): PaginationInterface  {
+
+        return $this->paginator->paginate(
+            $this->findAllOrderedByLang($locale),
+            $page,
+            3
+        );
+    }
+
+    public function findAllOrderedByLang(string $locale): Query
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.description', 'd')
+            ->addSelect('d')
+            ->leftJoin('d.tags', 't')
+            ->addSelect('t')
+            ->andWhere('d.lang = :locale')
+            ->setParameter('locale', $locale)
+            ->orderBy('p.publishedAt', 'DESC')
+            ->getQuery();
+    }
+
+
+
+    public function findLatestPosts(string $locale, int $limit = 2, ?int $currentId = null): array
+    {
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->leftJoin('p.description', 'd')
+            ->addSelect('d')
+            ->leftJoin('d.tags', 't')
+            ->addSelect('t')
+            ->andWhere('d.lang = :locale')
+            ->setParameter('locale', $locale)
+            ->orderBy('p.publishedAt', 'DESC')
+            ->setMaxResults($limit);
+
+        if ($currentId !== null) {
+            $queryBuilder->andWhere('p.id != :currentId')
+                ->setParameter('currentId', $currentId);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 }

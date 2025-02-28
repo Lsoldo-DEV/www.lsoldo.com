@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<section class="container blog py-5">
+		<section class="container portfolio py-5" id="portfolio">
+			<div class="heading">
+				<h4 class="pretitle" data-aos="fade-up">
+					Blog
+				</h4>
+				<h1 class="title col-12" data-aos="fade-up" data-aos-delay="100">
+					Our Blog
+				</h1>
+			</div>
+
+			<!-- FILTRES TAGS -->
+			<ul class="filters d-flex flex-wrap my-4">
+				<li class="nav-item portfolio-btn active">
+					<a class="nav-link" data-filter="*">Tous</a>
+				</li>
+				{% for post in posts %}
+					{% for description in post.description %}
+
+						{% for tag in description.tags %}
+							<li class="nav-item portfolio-btn mx-1 my-1">
+								<a class="nav-link" data-filter=".tag-{{ tag.id }}">{{ tag.name }}</a>
+							</li>
+						{% endfor %}
+
+					{% endfor %}
+				{% endfor %}
+			</ul>
+
+			<!-- ARTICLES -->
+			<div class="row portfolio-row gy-4">
+				{% for post in posts %}
+					{% for description in post.description %}
+						<div class="col-md-6 col-lg-4 mx-auto {% for tag in description.tags %}tag-{{ tag.id }} {% endfor %}">
+							<div class="box box-service box-hover p-3 shadow-sm" data-aos="fade-left" data-aos-delay="350">
+								<img src="{{ vich_uploader_asset(post, 'thumbnailFile') }}" class="img-fluid rounded mb-3" alt="{{ description.title }}">
+
+								<h2 class="title-2 my-2 mb-2">{{ description.title }}</h2>
+
+								<p>{{ description.summary | slice(0, 100) ~ '...' }}</p>
+
+								<a href="{{ path('app_blog_show', {'id': post.id}) }}" class="my-2 learn-more">Read more
+									<i class="bi bi-arrow-right"></i>
+								</a>
+							</div>
+						</div>
+					{% endfor %}
+				{% endfor %}
+			</div>
+			{# display navigation #}
+			<div class="navigation d-flex justify-content-end">
+				{{ knp_pagination_render(posts, 'components/custom_pagination.html.twig') }}
+			</div>
+		</section>
+	</section>
+{% endblock %}
+

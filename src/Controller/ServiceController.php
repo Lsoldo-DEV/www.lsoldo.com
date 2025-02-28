@@ -31,18 +31,20 @@ class ServiceController extends AbstractController
             'services' => $services,
             "service_title"=>$titleArray[0],
             "service_subtitle"=>$titleArray[1],
-            "faqs" => $faqRepository->findAll()
+            "faqs" => $faqRepository->findAllOrderedByLang($request->get('_locale'))
         ]);
     }
     #[Route('/{id}', name: 'app_service_show', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function show(Service $service,SocialLinkRepository $linkRepository): Response
+    public function show(Service $service, Request $request, SocialLinkRepository $linkRepository, FAQRepository $FAQRepository): Response
     {
         $services = $this->serviceRepository->findAll();
         $link = $linkRepository->findOneBy([], ['id' => 'DESC']);
+        $faqs = $FAQRepository->findAllOrderedByLang($request->get('_locale'));
         return $this->render('pages/service/show.html.twig', [
             'service' => $service,
             'services' => $services,
             'link' => $link,
+            'faqs' => $faqs,
         ]);
     }
 }

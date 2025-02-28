@@ -43,6 +43,7 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
+
     public function __construct()
     {
         $this->publishedAt = new \DateTimeImmutable();
@@ -100,4 +101,6 @@ class Comment
     {
         $this->post = $post;
     }
+
+
 }

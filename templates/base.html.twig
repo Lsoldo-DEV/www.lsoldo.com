@@ -1,74 +1,124 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta name="view-transition" content="same-origin" />
-        <title>{% block title %}techida | IT Solutions & Business Services HTML template {% endblock %}</title>
-        <link rel="icon" href="{{asset('template/images/favicon.ico')}}">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta name="view-transition" content="same-origin"/>
+		<title>
+			{% block title %}techida | IT Solutions & Business Services HTML template
+			{% endblock %}
+		</title>
+		<link rel="icon" href="{{asset('template/images/favicon.ico')}}">
 
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{asset('template/css/bootstrap.min.css')}}">
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{asset('template/css/bootstrap.min.css')}}">
 
-            <link rel="stylesheet" href="{{asset('template/css/aos.css')}}">
-            <link rel="stylesheet" href="{{asset('template/css/jquery.fancybox.min.css')}}">
-            <link rel="stylesheet" href="{{asset('template/css/owl.carousel.min.css')}}">
-            <link rel="stylesheet" href="{{asset('template/css/owl.theme.default.min.css')  }}">
-            <link rel="stylesheet" href="{{asset('template/cdn/ajax/libs/toastr.js/latest/css/toastr.min.css')  }}">
-            <link rel="stylesheet" href="{{asset('template/cdn/npm/bootstrap-icons%401.11.3/font/bootstrap-icons.min.css')}}">
+			<link rel="stylesheet" href="{{asset('template/css/aos.css')}}">
+			<link rel="stylesheet" href="{{asset('template/css/jquery.fancybox.min.css')}}">
+			<link rel="stylesheet" href="{{asset('template/css/owl.carousel.min.css')}}">
+			<link rel="stylesheet" href="{{asset('template/css/owl.theme.default.min.css') }}">
+			<link rel="stylesheet" href="{{asset('template/cdn/ajax/libs/toastr.js/latest/css/toastr.min.css') }}">
+			<link rel="stylesheet" href="{{asset('template/cdn/npm/bootstrap-icons%401.11.3/font/bootstrap-icons.min.css')}}">
 
-            <link rel="preconnect" href="https://fonts.googleapis.com/">
-            <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800&amp;display=swap"
-                  rel="stylesheet">
-            <link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
-        {% endblock %}
+			<link rel="preconnect" href="https://fonts.googleapis.com/">
+			<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+			<link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
+		{% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body class="home-1">
-        {% block header %}
-            {% include 'layout/partials/_progress.html.twig' %}
-            <header class="header">
-                {% include 'layout/partials/_nav.html.twig' %}
-            </header>
-            {% include 'layout/partials/_breadcrumbs.html.twig' %}
-        {% endblock %}
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body class="home-1">
+		{% block header %}
+			{% include 'layout/partials/_progress.html.twig' %}
+			<header class="header">
+				{% include 'layout/partials/_nav.html.twig' %}
+			</header>
+			{% include 'layout/partials/_breadcrumbs.html.twig' %}
+		{% endblock %}
 
-            {% block body %}{% endblock %}
+		{% block body %}{% endblock %}
 
 
-        {% block footer %}
-            <twig:Footer />
-        {% endblock %}
-        {% block other_javascripts %}
-            <script src="{{ asset('template/js/jquery-3.6.1.min.js') }}"></script>
+		{% block footer %}
+			<twig:Footer/>
+		{% endblock %}
+		{% block other_javascripts %}
+			<script src="{{ asset('template/js/jquery-3.6.1.min.js') }}"></script>
 
-            <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
+			<script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
 
-            <script src="{{ asset('template/cdn/ajax/libs/toastr.js/latest/js/toastr.min.js') }}"></script>
+			<script src="{{ asset('template/cdn/ajax/libs/toastr.js/latest/js/toastr.min.js') }}"></script>
 
-            <script src="{{ asset('template/js/owl.carousel.min.js') }}"></script>
+			<script src="{{ asset('template/js/owl.carousel.min.js') }}"></script>
 
-            <script src="{{ asset('template/js/aos.js') }}"></script>
+			<script src="{{ asset('template/js/aos.js') }}"></script>
 
-            <script src="{{ asset('template/js/gsap.min.js') }}"></script>
+			<script src="{{ asset('template/js/gsap.min.js') }}"></script>
 
-            <script src="{{ asset('template/js/jquery.counterup.min.js') }}"></script>
-            <script src="{{ asset('template/js/jquery.waypoints.js') }}"></script>
+			<script src="{{ asset('template/js/jquery.counterup.min.js') }}"></script>
+			<script src="{{ asset('template/js/jquery.waypoints.js') }}"></script>
 
-            <script src="{{ asset('template/js/particles.min.js') }}"></script>
+			<script src="{{ asset('template/js/particles.min.js') }}"></script>
 
-            <script src="{{ asset('template/js/isotope.min.js') }}"></script>
+			<script src="{{ asset('template/js/isotope.min.js') }}"></script>
 
-            <script src="{{ asset('template/js/jquery.fancybox.min.js') }}"></script>
+			<script src="{{ asset('template/js/jquery.fancybox.min.js') }}"></script>
 
-            <script src="{{ asset('template/cdn/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js') }}"></script>
+			<script src="{{ asset('template/cdn/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js') }}"></script>
 
-            <script src="{{ asset('template/js/main.js') }}"></script>
-        {% endblock %}
-    </body>
+			<script src="{{ asset('template/js/main.js') }}"></script>
+
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+					// Toggle des commentaires
+					const commentToggle = document.querySelector('.comment-toggle');
+					const commentsSection = document.querySelector('.comments');
+					const commentIcon = document.querySelector('.comment-icon');
+					
+					if(commentToggle && commentsSection) {
+						commentToggle.addEventListener('click', function() {
+							const isHidden = commentsSection.classList.toggle('d-none');
+							
+							// Changement d'icône
+							if(commentIcon) {
+								commentIcon.classList.toggle('bi-chat');
+								commentIcon.classList.toggle('bi-chat-dots');
+							}
+							
+							// Animation de défilement
+							if(!isHidden) {
+								setTimeout(() => {
+									commentsSection.scrollIntoView({
+										behavior: 'smooth',
+										block: 'start'
+									});
+								}, 100);
+							}
+						});
+					}
+
+					// Mise à jour dynamique du compteur
+					document.addEventListener('commentAdded', function(e) {
+						const countElement = document.querySelector('.comment-count');
+						if(countElement) {
+							const newCount = parseInt(countElement.textContent) + 1;
+							countElement.textContent = newCount;
+							
+							// Mise à jour du titre
+							const commentTitle = document.querySelector('.comments h3');
+							if(commentTitle) {
+								commentTitle.textContent = `{{ 'comments'|trans }} (${newCount})`;
+							}
+						}
+					});
+				});
+			</script>
+		{% endblock %}
+	</body>
 </html>

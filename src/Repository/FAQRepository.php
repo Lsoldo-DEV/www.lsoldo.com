@@ -40,4 +40,14 @@ class FAQRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findAllOrderedByLang(string $local)
+{
+    return $this->createQueryBuilder('p')
+        ->andWhere('p.lang = :val')
+        ->setParameter('val', $local)
+        ->getQuery()
+        ->getResult();
+}
+
 }

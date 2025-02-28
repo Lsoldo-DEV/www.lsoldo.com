@@ -41,9 +41,10 @@ class ProjectRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-    public function findAllOrderedByLang(string $local){
+    public function findAllOrderedByLang(string $local)
+    {
         return $this->findAllWithTags()
-                ->andWhere('p.lang = :val')
+            ->andWhere('p.lang = :val')
             ->setParameter('val', $local)
             ->getQuery()
             ->getResult();
@@ -53,7 +54,6 @@ class ProjectRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->leftJoin('p.tags', 't')
             ->addSelect('t')
-           ;
+        ;
     }
-
 }

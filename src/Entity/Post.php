@@ -12,12 +12,16 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use App\Entity\Comment;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Defines the properties of the Post entity to represent the blog posts.
@@ -33,6 +37,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[UniqueEntity(fields: ['slug'], message: 'post.slug_unique', errorPath: 'title')]
+#[Vich\Uploadable]
 class Post
 {
     #[ORM\Id]
@@ -40,12 +45,8 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
 
-
-
     #[ORM\Column(type: Types::STRING)]
     private ?string $slug = null;
-
-
 
     #[ORM\Column]
     private \DateTimeImmutable $publishedAt;
@@ -54,13 +55,14 @@ class Post
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
+    #[ORM\Column(length: 255, nullable:true)]
+    private ?string $lang = null;
+
     /**
      * @var Collection<int, Description>
      */
     #[ORM\OneToMany(targetEntity: Description::class, mappedBy: 'post')]
     private Collection $description;
-
-
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $thumbnail = null;
@@ -70,18 +72,24 @@ class Post
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private DateTimeImmutable $updateAt;
+
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'post')]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->publishedAt = new \DateTimeImmutable();
         $this->description = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
-    {
+    { 
         return $this->id;
     }
-
-
 
     public function getSlug(): ?string
     {
@@ -92,8 +100,6 @@ class Post
     {
         $this->slug = $slug;
     }
-
-
 
     public function getPublishedAt(): \DateTimeImmutable
     {
@@ -113,6 +119,18 @@ class Post
     public function setAuthor(User $author): void
     {
         $this->author = $author;
+    }
+
+    public function getLang(): ?string
+    {
+        return $this->lang;
+    }
+
+    public function setLang(?string $lang): self
+    {
+        $this->lang = $lang;
+
+        return $this;
     }
 
     /**
@@ -187,4 +205,37 @@ class Post
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        $this->comments->removeElement($comment);
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->slug!=null?$this->slug:$this->id;
+    }
 }
+
+
+

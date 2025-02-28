@@ -40,7 +40,7 @@ class Project
     #[ORM\ManyToMany(targetEntity: ProjectFile::class, inversedBy: 'projects')]
     private Collection $projectFiles;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable:true)]
     private ?string $lang = null;
     /**
      * @var Collection<int, Tag>

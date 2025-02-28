@@ -1749,3 +1749,66 @@ svg {
     margin-block: 0.5rem;
 }
 
+.page-link {
+    color: var(--brand-color);
+    background-color: var(--boxColor);
+    border: 1px solid var(--brand-color);
+}
+
+.page-link:hover {
+    color: #fff;
+    background-color: var(--brand-color);
+    border-color: var(--brand-color);
+}
+
+.page-link:focus {
+    color: #fff;
+    background-color: var(--brand-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(255, 75, 22, 0.25);
+}
+
+.active > .page-link, .page-link.active {
+    color: #fff;
+    background-color: var(--brand-color);
+    border-color: var(--brand-color);
+}
+
+.disabled > .page-link, .page-link.disabled {
+    color: var(--secendaryColor);
+    pointer-events: none;
+    background-color: var(--boxColor);
+    border-color: var(--secendaryColor);
+}
+
+.page-item:not(:first-child) .page-link {
+    margin-left: calc(var(--bs-border-width) * -1);
+}
+
+.page-item:first-child .page-link {
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+.comment-icon {
+    transition: transform 0.3s ease, color 0.2s ease;
+}
+
+.comment-toggle:hover .comment-icon {
+    transform: scale(1.1);
+    color: var(--primary-color);
+}
+
+.comments {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.comments.d-none {
+    opacity: 0;
+    transform: translateY(10px);
+}

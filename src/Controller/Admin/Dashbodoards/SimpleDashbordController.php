@@ -36,7 +36,7 @@ class SimpleDashbordController extends AbstractDashboardController
         ->setTitle('<a href="' . $this->generateUrl('app_home') . '" style="text-decoration: none;">'
             . '<img src="/logo_tls.webp"></a>')
         ->renderContentMaximized()
-
+        ->renderSidebarMinimized()
         ->generateRelativeUrls()
         ->setFaviconPath("logo_tls.webp")
         ->setLocales([

@@ -20,6 +20,9 @@ class FAQ
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $answer = null;
 
+    #[ORM\Column(length: 255, nullable:true)]
+    private ?string $lang = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class FAQ
     public function setAnswer(?string $answer): static
     {
         $this->answer = $answer;
+
+        return $this;
+    }
+
+    public function getLang(): ?string
+    {
+        return $this->lang;
+    }
+
+    public function setLang(?string $lang): self
+    {
+        $this->lang = $lang;
 
         return $this;
     }
